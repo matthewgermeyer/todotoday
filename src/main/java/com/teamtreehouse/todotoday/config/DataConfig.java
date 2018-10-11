@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import javax.sql.DataSource;
 import java.util.Properties;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.teamtreehouse.todotoday.dao")
@@ -34,6 +34,16 @@ public class DataConfig {
         return factory;
     }
 
+  private Properties getHibernateProperties() {
+    Properties properties = new Properties();
+    properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+    properties.put("hibernate.implicit_naming_strategy",env.getProperty("hibernate.implicit_naming_strategy"));
+    properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+    properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+    properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+    return properties;
+  }
+
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
@@ -44,13 +54,5 @@ public class DataConfig {
         return ds;
     }
 
-    private Properties getHibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        properties.put("hibernate.implicit_naming_strategy",env.getProperty("hibernate.implicit_naming_strategy"));
-        properties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-        properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        return properties;
-    }
+
 }

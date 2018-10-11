@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head" lang="en">
     <meta charset="UTF-8"/>
     <meta description="viewport" content="width=device-width, initial-scale=1"/>
@@ -19,7 +19,9 @@
                 <li sec:authentication="name"></li>
                 <li>
                     <form class="logout inline" th:action="@{/logout}" method="post">
-                        <button type="submit"><i class="material-icons">power_settings_new</i></button>
+                        <button type="submit">
+                            <i class="material-icons">power_settings_new</i>
+                        </button>
                     </form>
                 </li>
             </ul>
